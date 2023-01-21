@@ -1,0 +1,15 @@
+{% extends 'includes/nav.html'%}
+{% block content%}
+<h1>SignUp</h1>
+
+    {{error}}
+
+    <form action="" method="POST">
+        {% csrf_token %}
+    {{form.as_p}}
+    <button>
+        Sign Up
+    </button>
+    </form>
+    <br>
+{% endblock %}
