@@ -14,12 +14,12 @@
             
             
             {% if user.is_authenticated %}
-            <li><a href="/menu">Menu</a></li>
-            <li><a href="">Home</a></li>
+            <li><a href="pages/menu">Menu</a></li>
+            <li><a href="">Nada</a></li>
             <li><a href="/logout">Logout</a></li>
             {% else %}
-            <li><a href="/login">Log in</a></li>
-            <li><a href="/reg">Sign in</a></li>
+            <li><a href="/pages/login">Log in</a></li>
+            <li><a href="/pages/reg">Sign in</a></li>
             <li><a href="/">tres</a></li>
             {% endif %}
         </ul>

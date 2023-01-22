@@ -19,10 +19,10 @@ from tasks import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("__reload__/", include("django_browser_reload.urls")),
+    path("__reload__/", include("django_browser_reload.urls")), #Para que tailwind recargue la pag auto
     path('', views.index, name='index'),
-    path('menu/',views.menu, name='menu'),
+    path('pages/menu/',views.menu, name='menu'),
     path('logout/',views.log_out, name='logout'),
-    path('reg/',views.reg, name='reg'),
-    path('login/',views.log_in,name='login')
+    path('pages/reg/',views.reg, name='reg'),
+    path('pages/login/',views.log_in,name='login')
 ]

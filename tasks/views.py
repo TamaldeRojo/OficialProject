@@ -7,12 +7,12 @@ from django.db import IntegrityError
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'pages/index.html')
 
 def reg(request):
 
     if request.method == 'GET':
-         return render(request,'reg.html',{
+         return render(request,'pages/reg.html',{
         'form': UserCreationForm
         })
     else:
@@ -25,19 +25,19 @@ def reg(request):
                 login(request,user)
                 return redirect('menu')
             except IntegrityError:
-                return render(request,'reg.html',{
+                return render(request,'pages/reg.html',{
                     'form': UserCreationForm,
                     'error': 'Username already exists'
                     })
             #register user
             
-        return render(request,'index.html',{
+        return render(request,'pages/index.html',{
             'form': UserCreationForm,
             'error': 'Passwords dont match'
             })
    
 def menu(request):
-    return render(request,'menu.html')
+    return render(request,'pages/menu.html')
 
 def log_out(request):
     logout(request)
@@ -45,14 +45,14 @@ def log_out(request):
 
 def log_in(request):
     if request.method == 'GET':
-        return render(request,'login.html',{
+        return render(request,'pages/login.html',{
                 'log' : AuthenticationForm
             })
     else:
         user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
         
         if user is None:
-            return render(request,'login.html',{
+            return render(request,'pages/login.html',{
                 'form' : AuthenticationForm,
                 'error' : 'Username or password is incorrect'
                     })
