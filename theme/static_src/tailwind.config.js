@@ -13,6 +13,7 @@ module.exports = {
 
         /*  Templates within theme app (<tailwind_app_name>/templates), e.g. base.html. */
         '../templates/**/*.html',
+        "*.js",
 
         /*
          * Main templates directory of the project (BASE_DIR/templates).
@@ -39,10 +40,15 @@ module.exports = {
          * Python: If you use Tailwind CSS classes in Python, uncomment the following line
          * and make sure the pattern below matches your project structure.
          */
-        // '../../**/*.py'
+         '../../**/*.py'
     ],
     theme: {
-        extend: {},
+        extend: {
+            colors:{
+                'ccyan' : '#12CBC4',
+                'cgreen': '#0be881'
+            },
+        },
     },
     plugins: [
         /**
