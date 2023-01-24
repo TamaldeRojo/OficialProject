@@ -1,8 +1,20 @@
 {% extends 'includes/nav.html'%}
 {% block content%}
 
-    <h1>LOGIN</h1>
-    {{error}}
+   
+    <!DOCTYPE html>
+    <html lang="en" class="h-full">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body class="bg-gradient-to-br
+    from-ccyan to-cgreen via-green-200 
+    antialiased bg-no-repeat text-white">
+        <h1>LOGIN</h1>
+        {{error}}
 <form action="" method="POST">
     {% csrf_token %}
     {{log.as_p}}
@@ -10,4 +22,7 @@
         Log in
     </button>
 </form>
+    </body>
+    </html>
+    
 {% endblock %}
