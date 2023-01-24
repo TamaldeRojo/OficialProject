@@ -6,22 +6,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Registration</title>
 </head>
 <body class="bg-gradient-to-br
 from-ccyan to-cgreen via-green-200 
-antialiased bg-no-repeat text-white">
-    <h1>SignUp</h1>
+antialiased bg-no-repeat text-black">
+    
+<h1>SignUp</h1>
 
     {{error}}
 
-    <form action="" method="POST">
+<form action="" method="POST">
         {% csrf_token %}
     {{form.as_p}}
     <button>
-        Sign Up
+        Save
     </button>
-    </form>
+</form>
     <br>
 </body>
 </html>

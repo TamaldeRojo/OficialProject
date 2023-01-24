@@ -5,6 +5,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.http import HttpResponse
 from django.db import IntegrityError
 
+
 # Create your views here.
 def index(request):
     return render(request, 'pages/index.html')
@@ -16,7 +17,7 @@ def reg(request):
         'form': UserCreationForm
         })
     else:
-        print(request.POST)
+        #print(request.POST)
         if request.POST['password1'] == request.POST['password2']:
             try:
                 user = User.objects.create_user(username=request.POST['username'],
@@ -53,7 +54,7 @@ def log_in(request):
         
         if user is None:
             return render(request,'pages/login.html',{
-                'form' : AuthenticationForm,
+                'log' : AuthenticationForm,
                 'error' : 'Username or password is incorrect'
                     })
         else:
