@@ -2,13 +2,16 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.db import IntegrityError
 
 
 # Create your views here.
 def index(request):
-    return render(request, 'pages/index.html')
+    if request.user.is_authenticated:
+        return render(request, 'pages/menu.html')
+    else:
+        return render(request, 'pages/index.html')
 
 def reg(request):
 
@@ -38,8 +41,10 @@ def reg(request):
             })
    
 def menu(request):
-    return render(request,'pages/menu.html')
-
+    if request.user.is_authenticated:
+        return render(request,'pages/menu.html')
+    else: 
+        return render(request,'pages/index.html') 
 def log_out(request):
     logout(request)
     return redirect(index)
