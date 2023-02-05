@@ -17,22 +17,22 @@
 
     {% if user.is_authenticated %}
 
-    <header class="bg-white">
+    <header class="bg-gray-100">
         <nav class="flex justify-between items-center w-[98%]  mx-auto">
             <div>
                 <h1 class="font-mono pt-2 pb-2 italic font-bold text-lg ">Quetzal <br> &nbsp; Block</h1>
             </div>
             <div
-                class="nav-links duration-500 md:static absolute bg-white md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto  w-full flex items-center px-5">
+                class="nav-links duration-500 md:static absolute bg-gray-100 md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto  w-full flex items-center px-5">
                 <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
                     <li>
-                        <a class="hover:text-gray-500" href="/pages/menu">Menu</a>
+                        <a class="hover:text-gray-500" href="{% url 'menu' %}">Menu</a>
                     </li>
                     <li>
-                        <a class="hover:text-gray-500" href="/">Perfil</a>
+                        <a class="hover:text-gray-500" href="{% url 'perfil' %}">Perfil</a>
                     </li>
                     <li>
-                        <a class="hover:text-gray-500" href="#">Mensajes</a>
+                        <a class="hover:text-gray-500" href="{% url 'mensajes' %}">Mensajes</a>
                     </li>
                     <li>
                         <a class="hover:text-gray-500" href="#">Tendencias</a>
@@ -56,34 +56,34 @@
         }
     </script>
     {% else %}
-    <header class="bg-white">
+    <header class="bg-gray-100">
         <nav class="flex justify-between items-center w-[98%]  mx-auto">
             <div>
                 <h1 class="font-mono pt-2 pb-2 italic font-bold text-lg ">Quetzal <br> &nbsp; Block</h1>
             </div>
             <div
-                class="nav-links duration-500 md:static absolute bg-white md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto  w-full flex items-center px-5">
+                class="nav-links duration-500 md:static absolute bg-gray-100 md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto  w-full flex items-center px-5">
                 <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8 pl-20">
                     <li>
                         <a class="hover:text-gray-500" href="/">Inicio</a>
                     </li>
                     <li>
-                        <a class="hover:text-gray-500" href="#">Conocenos</a>
+                        <a class="hover:text-gray-500" href="conocenos">Conocenos</a>
                     </li>
                     <li>
-                        <a class="hover:text-gray-500" href="#">Directorio</a>
+                        <a class="hover:text-gray-500" href="empresas">Empresas</a>
                     </li>
                     <li>
-                        <a class="hover:text-gray-500" href="#">Novedades</a>
+                        <a class="hover:text-gray-500" href="novedades">Novedades</a>
                     </li>
                 </ul>
             </div>
 
             <div class="flex items-center gap-2">
-                <a href="/pages/login"><button
+                <a href="login"><button
                         class="bg-[#a6c1ee] text-white px-5 py-2 rounded-full hover:bg-[#87acec]">Log
                         In</button></a>
-                <a href="/pages/reg"><button
+                <a href="reg"><button
                         class="bg-[#a6c1ee] text-white px-5 py-2 rounded-full hover:bg-[#87acec]">Sign
                         Up</button></a>
                 <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl cursor-pointer md:hidden"></ion-icon>

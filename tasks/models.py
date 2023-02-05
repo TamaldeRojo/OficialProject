@@ -28,3 +28,26 @@ class InfoUsers(models.Model):
     country = models.CharField(max_length=60, choices=countries)
     createdDate = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class materiales(models.Model):
+    precio = models.IntegerField(max_length=100)
+    nombre = models.CharField(max_length=250)
+    
+class posts(models.Model):
+    title = models.CharField(max_length=250)
+    username = models.ForeignKey(User, on_delete=models.CASCADE)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.title + ' | '+ str(self.username)
+
+class imgs(models.Model):
+    ruta = models.URLField()
+    nombre_img = models.CharField(max_length=150)
+
+class constructoras(models.Model):
+    nombre_c = models.CharField(max_length=200)
+    password_c = models.CharField(max_length=200)
+    email_c = models.CharField(max_length=250)
+    text_c = models.TextField(max_length=500)
+

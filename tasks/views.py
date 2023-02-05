@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.http import HttpResponse, HttpResponseRedirect
 from django.db import IntegrityError
+from django.views.generic import ListView,DetailView, CreateView
+from .forms import createPost
+from .models import posts
 
 
 # Create your views here.
@@ -39,12 +42,31 @@ def reg(request):
             'form': UserCreationForm,
             'error': 'Passwords dont match'
             })
-   
+# MENU VIEW ------------------------------------------------------------->
 def menu(request):
     if request.user.is_authenticated:
-        return render(request,'pages/menu.html')
+        createP = createPost()
+        if request.method == 'GET':
+            objects_posts = posts.objects.all()
+            return render(request,'pages/menu.html',{ 'post': objects_posts, 'createP': createP })
+        elif request.method == 'POST':
+            form = createPost(request.POST)
+            new_post = form.save(commit=False)
+            new_post.user = request.user
+            new_post.save()
+            return redirect('menu')
+       
     else: 
         return render(request,'pages/index.html') 
+
+def post_detail(request,post_id):
+    if request.user.is_authenticated:
+        detail_posts = posts.objects.get(id=post_id)
+        return render(request,'pages/post_detail.html',{ 'post': detail_posts })
+    else: 
+        return render(request,'pages/index.html') 
+
+# END MENU VIEW ------------------------------------------------------------>
 def log_out(request):
     logout(request)
     return redirect(index)
@@ -65,4 +87,18 @@ def log_in(request):
         else:
             login(request, user)
             return redirect('menu')
-   
+
+def conocenos(request):
+    return render(request,'pages/conocenos.html')
+
+def empresas(request):
+    return render(request,'pages/empresas.html')
+
+def novedades(request):
+    return render(request, 'pages/novedades.html')
+
+def perfil(request):
+    return render(request, 'pages/perfil.html')
+
+def mensajes(request):
+    return render(request, 'pages/mensajes.html')

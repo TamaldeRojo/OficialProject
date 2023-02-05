@@ -1,0 +1,7 @@
+{% extends 'includes/nav.html' %}
+
+{% block content %}
+<h1>{{post.title}}</h1>
+<p>{{post.description}}</p>
+<button><a href="{% url 'menu' %}">BACK</a></button>
+{% endblock %}

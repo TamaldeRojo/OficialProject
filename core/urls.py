@@ -17,12 +17,21 @@ from django.contrib import admin
 from django.urls import path,include
 from tasks import views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("__reload__/", include("django_browser_reload.urls")), #Para que tailwind recargue la pag auto
     path('', views.index, name='index'),
-    path('pages/menu/',views.menu, name='menu'),
+    #menu paths ------------------------------------------------------------->
+    path('menu',views.menu, name='menu'),
+    path('post/<int:post_id>/',views.post_detail, name='post_detail'),
+    #END menu paths ------------------------------------------------------------->
     path('logout/',views.log_out, name='logout'),
-    path('pages/reg/',views.reg, name='reg'),
-    path('pages/login/',views.log_in,name='login')
+    path('reg',views.reg, name='reg'),
+    path('login',views.log_in,name='login'),
+    path('conocenos',views.conocenos,name='conocenos'),
+    path('empresas',views.empresas,name='empresas'),
+    path('novedades',views.novedades, name='novedades'),
+    path('perfil', views.perfil, name='perfil'),
+    path('mensajes',views.mensajes, name='mensajes')
 ]
