@@ -5,17 +5,33 @@ from django.contrib.auth import login, logout, authenticate
 from django.http import HttpResponse, HttpResponseRedirect
 from django.db import IntegrityError
 from django.views.generic import ListView,DetailView, CreateView
+
 from .forms import createPost
-from .models import posts
+from .models import posts,Carausel
+
+import time
 
 
 # Create your views here.
 def index(request):
-    if request.user.is_authenticated:
-        return render(request, 'pages/menu.html')
-    else:
-        return render(request, 'pages/index.html')
+    
 
+        
+        obj = Carausel.objects.all()
+        first_obj = obj.get(id=4).img.url
+        s_obj = obj.get(id=5).img.url
+        context = {
+            'obj': obj, 'f_obj': first_obj, 's_obj': s_obj
+        }
+        if request.user.is_authenticated:
+            return render(request, 'pages/menu.html')
+        else:
+            return render(request, 'pages/index.html', context)
+        
+
+
+            
+        
 def reg(request):
 
     if request.method == 'GET':
@@ -102,3 +118,6 @@ def perfil(request):
 
 def mensajes(request):
     return render(request, 'pages/mensajes.html')
+
+def tendencias(request):
+    return render(request, 'pages/tendencias.html')

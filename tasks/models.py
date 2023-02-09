@@ -51,3 +51,10 @@ class constructoras(models.Model):
     email_c = models.CharField(max_length=250)
     text_c = models.TextField(max_length=500)
 
+class Carausel(models.Model):
+    img = models.ImageField(upload_to='pics/%y/%m/%d/')
+    nombre = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.nombre
+
