@@ -30,12 +30,12 @@ class InfoUsers(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class materiales(models.Model):
-    precio = models.IntegerField(max_length=100)
+    precio = models.IntegerField()
     nombre = models.CharField(max_length=250)
     
 class posts(models.Model):
     title = models.CharField(max_length=250)
-    username = models.ForeignKey(User, on_delete=models.CASCADE,null=True, related_name='blog_posts')
+    username = models.ForeignKey(User, on_delete=models.CASCADE,null=True, related_name='social_post_author')
     description = models.TextField()
     created_at = models.DateField(auto_now=True)
     img = models.ImageField(upload_to='pics/%y/%m/%d/')

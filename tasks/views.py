@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
-from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.db import IntegrityError
 from django.views.generic import ListView,DetailView, CreateView
 
@@ -16,8 +16,8 @@ import time
 def index(request):
     
         obj = Carausel.objects.all()
-        first_obj = obj.get(id=6).img.url
-        s_obj = obj.get(id=7).img.url
+        first_obj = obj.get(id=2).img.url
+        s_obj = obj.get(id=3).img.url
         context = {
             'obj': obj, 'f_obj': first_obj, 's_obj': s_obj
         }
@@ -64,10 +64,12 @@ def menu(request):
             objects_posts = posts.objects.all()
             return render(request,'pages/menu.html',{ 'post': objects_posts, 'createP': createP })
         elif request.method == 'POST':
-            form = createPost(request.POST)
-            new_post = form.save(commit=False)
-            new_post.user = request.user
-            new_post.save()
+            form = createPost(request.POST, request.FILES)
+            if form.is_valid():
+                new_post = form.save(commit=False)
+                new_post.username = request.user
+                new_post.save()
+
             return redirect('menu')
        
     else: 
