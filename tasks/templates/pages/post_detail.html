@@ -1,7 +1,25 @@
 {% extends 'includes/nav.html' %}
 
 {% block content %}
-<h1>{{post.title}}</h1>
+<!-- <h1>{{post.title}}</h1>
 <p>{{post.description}}</p>
 <button><a href="{% url 'menu' %}">BACK</a></button>
+<img src="{{post.img}}" alt=""> -->
+
+<!-- component -->
+<section class="font-mono bg-white container mx-auto px-5">
+    <div class="flex flex-col items-center py-8">
+      <div class="flex flex-col w-full mb-12 text-left">
+        <div class="w-full mx-auto lg:w-1/2">
+          <h1 class="mx-auto mb-6 text-2xl font-semibold text-black lg:text-3xl">{{post.title}}</h1>
+          <img class="rounded-sm" src="https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" />
+          <h2 class="mx-auto mt-4 mb-4 text-xl font-semibold text-black">Are you ready for a new experience and challenge ?</h2>
+          <p class="mx-auto text-base font-medium leading-relaxed text-gray-800">{{post.description}}</p>
+          <h3 class="mx-auto mt-4 mb-4 text-xl font-semibold text-black">Make challenges</h3>
+          <p class="mx-auto text-base font-medium leading-relaxed text-gray-800">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+        </div>
+        <div class="justify-center m-auto py-10 bg-black text-white rounded-full py-3 px-6"><a href="{% url 'menu' %}"><button>BACK</button></a></div>
+      </div>
+    </div>
+  </section>
 {% endblock %}

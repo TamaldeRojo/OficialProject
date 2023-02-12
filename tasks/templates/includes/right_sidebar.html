@@ -1,1 +1,6 @@
-right
+<ul>
+    {% for p in post %}
+    <a href="{%url 'post_detail' p.pk %}"><h2>{{p.title}}</h2></a>
+    <p>{{p.description | slice:":40"}}...</p>
+    {% endfor %}
+</ul>

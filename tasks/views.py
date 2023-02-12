@@ -15,11 +15,9 @@ import time
 # Create your views here.
 def index(request):
     
-
-        
         obj = Carausel.objects.all()
-        first_obj = obj.get(id=4).img.url
-        s_obj = obj.get(id=5).img.url
+        first_obj = obj.get(id=6).img.url
+        s_obj = obj.get(id=7).img.url
         context = {
             'obj': obj, 'f_obj': first_obj, 's_obj': s_obj
         }

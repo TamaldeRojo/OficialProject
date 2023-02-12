@@ -5,4 +5,8 @@ from .models import posts
 class createPost(ModelForm):
         class Meta:
                 model = posts 
-                fields = '__all__'
+                fields = ['title','username','description','img']
+
+        def __init__(self, *args, **kwargs):
+                super(createPost, self).__init__(*args,**kwargs)
+                self.fields['img'].required = False

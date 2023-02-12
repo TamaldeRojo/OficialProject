@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-#aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
 # Create your models here.
 
 """
@@ -35,8 +35,13 @@ class materiales(models.Model):
     
 class posts(models.Model):
     title = models.CharField(max_length=250)
-    username = models.ForeignKey(User, on_delete=models.CASCADE)
+    username = models.ForeignKey(User, on_delete=models.CASCADE,null=True, related_name='blog_posts')
     description = models.TextField()
+    created_at = models.DateField(auto_now=True)
+    img = models.ImageField(upload_to='pics/%y/%m/%d/')
+
+    class Meta:
+        ordering = ('-created_at',)
 
     def __str__(self):
         return self.title + ' | '+ str(self.username)
