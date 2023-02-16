@@ -1,6 +1,23 @@
-<ul>
+
+{% for p in post %}
+<div class="flex justify-center">
+    <div class="flex flex-col md:flex-row w-96 rounded-lg bg-white shadow-lg">
+      <img class="h-32 md:h-auto object-cover md:w-32 rounded-t-lg md:rounded-none md:rounded-l-lg" src="/media/{{p.img}}" alt="" />
+      <div class="p-6 flex flex-col justify-start">
+        <a href="{%url 'post_detail' p.pk %}"><h2 class="text-gray-900 text-xl font-medium mb-2">{{p.title}}</h2></a>
+        <p class="text-gray-700 text-base mb-4">
+            {{p.description | slice:":20"}}...
+        </p>
+        
+        <p class="text-gray-600 text-xs">{{p.created_at}}</p>
+      </div>
+    </div>
+  </div>
+  <br>
+  {% endfor %}
+{% comment %} <ul>
     {% for p in post %}
     <a href="{%url 'post_detail' p.pk %}"><h2>{{p.title}}</h2></a>
     <p>{{p.description | slice:":40"}}...</p>
     {% endfor %}
-</ul>
+</ul> {% endcomment %}
