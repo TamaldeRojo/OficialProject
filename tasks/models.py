@@ -63,6 +63,8 @@ class OpenAI(models.Model):
     created_at = models.DateField(auto_now=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='OpenAI_owner_img')
 
+    class Meta:
+        ordering = ('-created_at',)
 
 
 class imgs(models.Model):

@@ -61,30 +61,55 @@ def menu(request):
         createP = createPost()
         if request.method == 'GET':
 
+            imgs = OpenAI.objects.all()
             objects_posts = posts.objects.all()
-            return render(request,'pages/menu.html',{ 'post': objects_posts, 'createP': createP })
+            return render(request,'pages/menu.html',{ 'post': objects_posts, 'createP': createP, 'imgs' : imgs })
 
         elif request.method == 'POST':
-            #---------------DALL E 2----------------------------------------------
-            
+            if 'form_a_submit' in request.POST:
 
-            #--------------End DALL E 2 ------------------------------------------
+                form = createPost(request.POST, request.FILES)
+                if form.is_valid():
+                    new_post = form.save(commit=False)
+                    new_post.username = request.user
+                    new_post.save()
 
-            form = createPost(request.POST, request.FILES)
-            if form.is_valid():
-                new_post = form.save(commit=False)
-                new_post.username = request.user
-                new_post.save()
+                    return redirect('menu')
+                
+            elif 'form_b_submit' in request.POST:
+                 #---------------DALL E 2---------------------------------------------- 
+                    dalle = request.POST
+                    prompt = dalle['prompt']
+                
+                    response = requests.post('https://api.openai.com/v1/images/generations',
+                                                headers={'Authorization': 'Bearer ' + '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'},
+                                                json={
+                                                    'model': 'image-alpha-001',
+                                                    'prompt': prompt,
+                                                })
 
-            return redirect('menu')
+                    image_url = response.json()['data'][0]['url']
+                    print(image_url)
+
+                    openai_obj = OpenAI.objects.create(nombre=str(request.user)+'_|_'+str(image_url),photo=image_url,owner=request.user)
+                    openai_obj.save()
+
+                    
+
+                    """ img = OpenAI.objects.get(owner=request.user).order_by('-created_at').last()
+                    img """
+                    #lol = img.photo     
+                    return redirect('menu')  
+                   #--------------End DALL E 2 ------------------------------------------
+                
        
     else: 
-        return render(request,'pages/index.html') 
+        return render(request,'pages/index.html', {'lol', image_url}) 
 #END MENU----------------------------------------------------------------------------
 def post_detail(request,post_id):
     if request.user.is_authenticated:
         detail_posts = posts.objects.get(id=post_id)
-        return render(request,'pages/post_detail.html',{ 'post': detail_posts })
+        return render(request,'pages/post_detail.html')
     else: 
         return render(request,'pages/index.html') 
 
