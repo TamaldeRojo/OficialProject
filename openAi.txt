@@ -1,0 +1,19 @@
+ """  if request.POST == request.POST['prompt']:
+                dalle = request.POST
+                prompt = dalle['prompt']
+    
+                response = requests.post('https://api.openai.com/v1/images/generations',
+                                    headers={'Authorization': 'Bearer ' + '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'},
+                                    json={
+                                        'model': 'image-alpha-001',
+                                        'prompt': prompt,
+                                    })
+
+                image_url = response.json()['data'][0]['url']
+                print(image_url)
+
+                openai_obj = OpenAI.objects.create(nombre=str(request.user)+'_|_'+str(image_url),photo=image_url,owner=request.user)
+                openai_obj.save()
+
+                img = OpenAI.objects.get(owner=request.user).order_by('-created_at').last()
+                img.photo """

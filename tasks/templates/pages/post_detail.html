@@ -1,0 +1,28 @@
+{% extends 'includes/nav.html' %}
+
+{% block content %}
+<!-- <h1>{{post.title}}</h1>
+<p>{{post.description}}</p>
+<button><a href="{% url 'menu' %}">BACK</a></button>
+<img src="{{post.img}}" alt=""> -->
+
+<!-- component -->
+<section class="font-mono bg-white container mx-auto px-5">
+    <div class="flex flex-col items-center py-8">
+      <div class="flex flex-col w-full mb-12 text-left">
+        <div class="w-full mx-auto lg:w-1/2">
+          <h1 class="mx-auto mb-6 text-2xl font-semibold text-black lg:text-3xl">{{post.title}}</h1>
+          <img class="rounded-sm" src="/media/{{post.img}}" />
+          <h2 class="mx-auto mt-4 mb-4 text-xl font-semibold text-black">Are you ready for a new experience and challenge ?</h2>
+          <p class="mx-auto text-base font-medium leading-relaxed text-gray-800">{{post.description}}</p>
+          <h3 class="mx-auto mt-4 mb-4 text-xl font-semibold text-black">Make challenges</h3>
+          <p class="mx-auto text-base font-medium leading-relaxed text-gray-800">{{post.materiales}}</p>
+        </div>
+        <br>
+        <a href="{% url 'menu' %}" class="justify-center m-auto py-10 bg-black text-white rounded-full py-3 px-6">
+        <div><button>BACK</button></div>
+      </a>
+      </div>
+    </div>
+  </section>
+{% endblock %}

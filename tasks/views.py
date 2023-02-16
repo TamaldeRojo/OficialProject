@@ -2,14 +2,33 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
-from django.http import HttpResponse
 from django.db import IntegrityError
+import requests
+
+from .forms import createPost
+from .models import posts,Carausel, OpenAI
+import openai
+
 
 
 # Create your views here.
 def index(request):
-    return render(request, 'pages/index.html')
+    
+        obj = Carausel.objects.all()
+        first_obj = obj.get(id=6).img.url
+        s_obj = obj.get(id=7).img.url
+        context = {
+            'obj': obj, 'f_obj': first_obj, 's_obj': s_obj
+        }
+        if request.user.is_authenticated:
+            return render(request, 'pages/menu.html')
+        else:
+            return render(request, 'pages/index.html', context)
+        
 
+
+            
+        
 def reg(request):
 
     if request.method == 'GET':
@@ -36,10 +55,65 @@ def reg(request):
             'form': UserCreationForm,
             'error': 'Passwords dont match'
             })
-   
+# MENU VIEW ------------------------------------------------------------->
 def menu(request):
-    return render(request,'pages/menu.html')
+    if request.user.is_authenticated:
+        createP = createPost()
+        if request.method == 'GET':
 
+            imgs = OpenAI.objects.all()
+            objects_posts = posts.objects.all()
+            return render(request,'pages/menu.html',{ 'post': objects_posts, 'createP': createP, 'imgs' : imgs })
+
+        elif request.method == 'POST':
+            if 'form_a_submit' in request.POST:
+
+                form = createPost(request.POST, request.FILES)
+                if form.is_valid():
+                    new_post = form.save(commit=False)
+                    new_post.username = request.user
+                    new_post.save()
+
+                    return redirect('menu')
+                
+            elif 'form_b_submit' in request.POST:
+                 #---------------DALL E 2---------------------------------------------- 
+                    dalle = request.POST
+                    prompt = dalle['prompt']
+                
+                    response = requests.post('https://api.openai.com/v1/images/generations',
+                                                headers={'Authorization': 'Bearer ' + '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'},
+                                                json={
+                                                    'model': 'image-alpha-001',
+                                                    'prompt': prompt,
+                                                })
+
+                    image_url = response.json()['data'][0]['url']
+                    print(image_url)
+
+                    openai_obj = OpenAI.objects.create(nombre=str(request.user)+'_|_'+str(image_url),photo=image_url,owner=request.user)
+                    openai_obj.save()
+
+                    
+
+                    """ img = OpenAI.objects.get(owner=request.user).order_by('-created_at').last()
+                    img """
+                    #lol = img.photo     
+                    return redirect('menu')  
+                   #--------------End DALL E 2 ------------------------------------------
+                
+       
+    else: 
+        return render(request,'pages/index.html', {'lol', image_url}) 
+#END MENU----------------------------------------------------------------------------
+def post_detail(request,post_id):
+    if request.user.is_authenticated:
+        detail_posts = posts.objects.get(id=post_id)
+        return render(request,'pages/post_detail.html')
+    else: 
+        return render(request,'pages/index.html') 
+
+# END MENU VIEW ------------------------------------------------------------>
 def log_out(request):
     logout(request)
     return redirect(index)
@@ -60,4 +134,21 @@ def log_in(request):
         else:
             login(request, user)
             return redirect('menu')
-   
+
+def conocenos(request):
+    return render(request,'pages/conocenos.html')
+
+def empresas(request):
+    return render(request,'pages/empresas.html')
+
+def novedades(request):
+    return render(request, 'pages/novedades.html')
+
+def perfil(request):
+    return render(request, 'pages/perfil.html')
+
+def mensajes(request):
+    return render(request, 'pages/mensajes.html')
+
+def tendencias(request):
+    return render(request, 'pages/tendencias.html')
