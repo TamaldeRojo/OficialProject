@@ -66,6 +66,8 @@ class OpenAI(models.Model):
     class Meta:
         ordering = ('-created_at',)
 
+    def __str__(self):
+        return self.nombre
 
 class imgs(models.Model):
     ruta = models.URLField()

@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 import requests
+import random
 
 from .forms import createPost
 from .models import posts,Carausel, OpenAI
@@ -61,7 +62,10 @@ def menu(request):
         createP = createPost()
         if request.method == 'GET':
 
-            imgs = OpenAI.objects.all()
+            img_query = OpenAI.objects.all()
+            imgs = img_query.latest('id')
+            print("segunda "+ str(imgs))
+
             objects_posts = posts.objects.all()
             return render(request,'pages/menu.html',{ 'post': objects_posts, 'createP': createP, 'imgs' : imgs })
 
@@ -82,16 +86,16 @@ def menu(request):
                     prompt = dalle['prompt']
                 
                     response = requests.post('https://api.openai.com/v1/images/generations',
-                                                headers={'Authorization': 'Bearer ' + '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'},
+                                                headers={'Authorization': 'Bearer ' + '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'},
                                                 json={
                                                     'model': 'image-alpha-001',
                                                     'prompt': prompt,
                                                 })
 
                     image_url = response.json()['data'][0]['url']
-                    print(image_url)
+                    print("Primera " +image_url)
 
-                    openai_obj = OpenAI.objects.create(nombre=str(request.user)+'_|_'+str(image_url),photo=image_url,owner=request.user)
+                    openai_obj = OpenAI.objects.create(nombre=str(request.user)+'_|_'+str(random.randint(0,1000)),photo=image_url,owner=request.user)
                     openai_obj.save()
 
                     

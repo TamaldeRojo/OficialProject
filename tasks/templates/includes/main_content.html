@@ -111,8 +111,12 @@
       <div class="absolute bg-white shadow-lg left-10 p-6 border mt-2 border-indigo-300 
       rounded-lg w-11/12 mx-auto transition-all duration-500 ease-in-out translate-x-40 
       opacity-0 invisible peer-checked:opacity-100 peer-checked:visible peer-checked:translate-x-1">
-        <div class=" items-center justify-center">
-          <img src="" class="rounded-sm">
+      <div class=" items-center justify-center">
+          
+       
+            <img src="{{imgs.photo}}" class="rounded-sm">
+        
+
           <br>
           <form method="post" action="">
             {% csrf_token %}
