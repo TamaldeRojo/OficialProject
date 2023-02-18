@@ -86,7 +86,7 @@ def menu(request):
                     prompt = dalle['prompt']
                 
                     response = requests.post('https://api.openai.com/v1/images/generations',
-                                                headers={'Authorization': 'Bearer ' + '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'},
+                                                headers={'Authorization': 'Bearer ' + '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'},
                                                 json={
                                                     'model': 'image-alpha-001',
                                                     'prompt': prompt,
@@ -99,10 +99,6 @@ def menu(request):
                     openai_obj.save()
 
                     
-
-                    """ img = OpenAI.objects.get(owner=request.user).order_by('-created_at').last()
-                    img """
-                    #lol = img.photo     
                     return redirect('menu')  
                    #--------------End DALL E 2 ------------------------------------------
                 
