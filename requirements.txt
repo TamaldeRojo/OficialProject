@@ -2,3 +2,4 @@ django-environ-0.9.0
 pip install Pillow
 pip install django-multiselectfield
 pip install openai
+https://wall.alphacoders.com/by_sub_category.php?id=160351&name=Casa+Fondos+de+pantalla&filter=4K+Ultra+HD&lang=Spanish

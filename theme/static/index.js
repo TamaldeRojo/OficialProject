@@ -38,3 +38,22 @@ setInterval(function(){
     //   currentIndex = (currentIndex + 1) % images.length;
     //   nextImage.src = images[currentIndex];
     // }, 4000);
+
+
+    
+    // Definir una línea de números
+// const numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+// // Recorrer la línea de inicio a fin
+// console.log("Recorrido de inicio a fin:");
+// for (let i = 0; i < numeros.length; i++) {
+//   console.log(numeros[i]);
+// }
+
+// // Recorrer la línea de fin a inicio utilizando una estructura if
+// console.log("Recorrido de fin a inicio:");
+// for (let i = numeros.length - 1; i >= 0; i--) {
+//   if (numeros[i] % 2 === 0) { // Si el número es par
+//     console.log(numeros[i]);
+//   }
+// }
