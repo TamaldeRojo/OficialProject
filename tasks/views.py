@@ -18,8 +18,10 @@ def index(request):
         obj = Carausel.objects.all()
         first_obj = obj.get(id=6).img.url
         s_obj = obj.get(id=7).img.url
+        t_obj = obj.get(id=7).img.url
+        l_obj = obj.get(id=7).img.url
         context = {
-            'obj': obj, 'f_obj': first_obj, 's_obj': s_obj
+            'obj': obj, 'f_obj': first_obj, 's_obj': s_obj, 't_obj':t_obj,'l_obj':l_obj
         }
         if request.user.is_authenticated:
             return render(request, 'pages/menu.html')
@@ -43,7 +45,7 @@ def reg(request):
                 user = User.objects.create_user(username=request.POST['username'],
                     password=request.POST['password1'])
                 user.save()
-                login(request,user)
+                login(request,user, backend='django.contrib.auth.backends.ModelBackend')
                 return redirect('menu')
             except IntegrityError:
                 return render(request,'pages/reg.html',{
@@ -86,7 +88,7 @@ def menu(request):
                     prompt = dalle['prompt']
                 
                     response = requests.post('https://api.openai.com/v1/images/generations',
-                                                headers={'Authorization': 'Bearer ' + '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'},
+                                                headers={'Authorization': 'Bearer ' + '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'},
                                                 json={
                                                     'model': 'image-alpha-001',
                                                     'prompt': prompt,
@@ -109,7 +111,7 @@ def menu(request):
 def post_detail(request,post_id):
     if request.user.is_authenticated:
         detail_posts = posts.objects.get(id=post_id)
-        return render(request,'pages/post_detail.html')
+        return render(request,'pages/post_detail.html', {'post': detail_posts})
     else: 
         return render(request,'pages/index.html') 
 
@@ -120,7 +122,7 @@ def log_out(request):
 
 def log_in(request):
     if request.method == 'GET':
-        return render(request,'pages/login.html',{
+        return render(request,'account/login.html',{
                 'log' : AuthenticationForm
             })
     else:

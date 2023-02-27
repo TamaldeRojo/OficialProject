@@ -8,19 +8,6 @@ from multiselectfield import MultiSelectField
 
 # Create your models here.
 
-"""
-class usersInfo(models.Model):
-    countries = (
-        ('LATAM','LTM'),('UNITED STATES OF AMERICA', 'USA'),('CANADA','CANADA')
-    )
-    first_Name = models.CharField(max_length=200)
-    last_Name = models.CharField(max_length=200)
-    username = models.CharField(max_length=200)
-    password = models.CharField(max_length=200)
-    email = models.EmailField(max_length=254)
-    country = models.CharField(max_length=60, choices=countries)
-    createdDate = models.DateTimeField(auto_now_add=True) 
-"""
 
 class InfoUsers(models.Model):
     countries = (
@@ -47,9 +34,14 @@ class posts(models.Model):
     title = models.CharField(max_length=250)
     username = models.ForeignKey(User, on_delete=models.CASCADE,null=True, related_name='social_post_author')
     description = models.TextField()
+
+    email_field = models.EmailField(max_length=254)
+    presupuesto_prom = models.IntegerField(default=0)
+    contacto = models.CharField(max_length=250, default='No especifiado')
    # materiales = models.ForeignKey(materiales,on_delete=models.CASCADE, null=True)
     created_at = models.DateField(auto_now=True)
     img = models.ImageField(upload_to='pics/%y/%m/%d/')
+
 
     class Meta:
         ordering = ('-created_at',)

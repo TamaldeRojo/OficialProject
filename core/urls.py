@@ -20,5 +20,7 @@ urlpatterns = [
     path('novedades',views.novedades, name='novedades'),
     path('perfil', views.perfil, name='perfil'),
     path('mensajes',views.mensajes, name='mensajes'),
-    path('tendencias',views.tendencias, name='tendencias')
+    path('tendencias',views.tendencias, name='tendencias'),
+    #url-----------------------------------
+    path('accounts/', include('allauth.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

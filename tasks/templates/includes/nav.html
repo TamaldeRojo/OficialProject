@@ -1,5 +1,6 @@
 {% load static %}
 {% load tailwind_tags %}
+{% load account %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,8 +11,8 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
-        integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     {% tailwind_css %}
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -37,7 +38,7 @@
                     </li>
                     <li>
                         <a class="hover:text-gray-500" href="{% url 'perfil' %}"><ion-icon
-                                name="person-outline"></ion-icon> Perfil</a>
+                                name="person-outline"></ion-icon>Tu perfil, {% user_display user %}!</a>
                     </li>
                     <li>
                         <a class="hover:text-gray-500" href="{% url 'mensajes' %}"><ion-icon
